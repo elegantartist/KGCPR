@@ -1,0 +1,46 @@
+Master Prompt for Replit Agent: Phase 25 - Execute Architectural Realignment
+Objective: Your objective is to reset the KGCPR codebase to a clean slate and then build the correct architectural foundation as originally planned in the initial ADRs. This is a corrective action to ensure the project is stable, maintainable, and ready for future development.
+
+Instructions: You will execute this in three precise parts. Do not deviate.
+
+Part 1: The Clean Slate
+Task: Archive the current, non-compliant code and create an empty, correct directory structure.
+Commands:
+
+Bash
+
+# 1. Create a backup directory for the legacy code
+mkdir -p legacy_code
+
+# 2. Move all current files and folders into the backup directory
+# (This is a conceptual command; the agent will move all top-level files)
+mv * legacy_code/
+
+# 3. Create the correct, empty monorepo structure
+mkdir client server shared
+Part 2: Build the Correct Foundation
+Task: Execute the foundational ADRs to build the Node.js/TypeScript backend and the React/TypeScript frontend.
+Instructions: You will now re-run the core logic from Phases 1, 2, and 6.
+
+Initialize Backend:
+Navigate into the server directory.
+Run npm init -y.
+Run npm install express typescript ts-node @types/express @types/node.
+Create the tsconfig.json and server/src/index.ts files exactly as specified in Phase 1.
+Initialize Frontend:
+Navigate into the client directory.
+Run npm create vite@latest . -- --template react-ts.
+Run npm install.
+Run npm install -D tailwindcss postcss autoprefixer and npx tailwindcss init -p.
+Configure tailwind.config.js and src/index.css exactly as specified in Phase 2.
+Install UI Library:
+While in the client directory, run npx shadcn-ui@latest init (accepting defaults).
+Run npx shadcn-ui@latest add button card slider label toast input select checkbox menu as specified in Phase 6.
+Part 3: VERIFY
+Task: Confirm that the foundational architecture is clean, correct, and runnable.
+Instructions:
+
+Start the Backend: From the server directory, run npm start.
+Expected Outcome: The console shows KGCPR server is listening on port 3001.
+Start the Frontend: From the client directory, run npm run dev.
+Expected Outcome: The webview shows a blank page or a simple Vite/React template. There should be no KGC features visible.

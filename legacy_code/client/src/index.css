@@ -1,0 +1,208 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Logo Animation Keyframes */
+@keyframes wiggle {
+  0% { transform: rotate(0deg) scale(1); }
+  10% { transform: rotate(-15deg) scale(1.3); }
+  20% { transform: rotate(15deg) scale(1.35); }
+  30% { transform: rotate(-12deg) scale(1.35); }
+  40% { transform: rotate(12deg) scale(1.35); }
+  50% { transform: rotate(-8deg) scale(1.3) translateY(-5px); }
+  60% { transform: rotate(8deg) scale(1.3) translateY(5px); }
+  70% { transform: rotate(-5deg) scale(1.25) translateY(-3px); }
+  80% { transform: rotate(5deg) scale(1.25) translateY(3px); }
+  90% { transform: rotate(-2deg) scale(1.1); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+/* Animation Class */
+.logo-animation {
+  animation: wiggle 2s ease-in-out;
+}
+
+/* Logo Container Styling */
+.logo-metallic {
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  background: transparent;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Enhanced logo styling for better blue circle isolation */
+.logo-metallic img {
+  background: transparent;
+  border: 3px solid rgba(59, 130, 246, 0.2);
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, -0.8);
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Enhanced slider styling with color-coding */
+.slider {
+  background: linear-gradient(to right, #3b82f6 0%, #3b82f6 50%, #e5e7eb 50%, #e5e7eb 100%);
+}
+
+/* Custom slider track styling for color-coded feedback */
+[data-orientation="horizontal"] .slider-track {
+  background: hsl(var(--muted));
+}
+
+[data-orientation="horizontal"] .slider-range {
+  background: var(--primary, hsl(var(--primary)));
+}
+
+[data-orientation="horizontal"] .slider-thumb {
+  border-color: var(--primary, hsl(var(--primary)));
+  background: hsl(var(--background));
+}
+
+[data-orientation="horizontal"] .slider-thumb:focus-visible {
+  box-shadow: 0 0 0 2px var(--primary, hsl(var(--primary)));
+}
+
+/* Green Slider (Diet) - Bright green like screenshot */
+.slider-green {
+  --primary: hsl(103, 100%, 67%); /* bright green */
+}
+
+.slider-green [data-radix-slider-track],
+.slider-green span[data-orientation="horizontal"] {
+  background-color: #e8f5e8 !important;
+}
+
+.slider-green [data-radix-slider-range],
+.slider-green span[data-orientation="horizontal"] span,
+.slider-green .bg-primary {
+  background-color: #7aff53 !important;
+}
+
+.slider-green [data-radix-slider-thumb],
+.slider-green span[role="slider"],
+.slider-green .border-primary {
+  background-color: #7aff53 !important;
+  border-color: #7aff53 !important;
+}
+
+/* Blue Slider (Exercise) - Bright blue like screenshot */
+.slider-blue {
+  --primary: hsl(214, 100%, 67%); /* bright blue */
+}
+
+.slider-blue [data-radix-slider-track],
+.slider-blue span[data-orientation="horizontal"] {
+  background-color: #e8f2ff !important;
+}
+
+.slider-blue [data-radix-slider-range],
+.slider-blue span[data-orientation="horizontal"] span,
+.slider-blue .bg-primary {
+  background-color: #53a6ff !important;
+}
+
+.slider-blue [data-radix-slider-thumb],
+.slider-blue span[role="slider"],
+.slider-blue .border-primary {
+  background-color: #53a6ff !important;
+  border-color: #53a6ff !important;
+}
+
+/* Red Slider (Medication) - Bright red like screenshot */
+.slider-red {
+  --primary: hsl(0, 100%, 67%); /* bright red */
+}
+
+.slider-red [data-radix-slider-track],
+.slider-red span[data-orientation="horizontal"] {
+  background-color: #ffe8e8 !important;
+}
+
+.slider-red [data-radix-slider-range],
+.slider-red span[data-orientation="horizontal"] span,
+.slider-red .bg-primary {
+  background-color: #ff5353 !important;
+}
+
+.slider-red [data-radix-slider-thumb],
+.slider-red span[role="slider"],
+.slider-red .border-primary {
+  background-color: #ff5353 !important;
+  border-color: #ff5353 !important;
+}
+
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #3b82f6;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.slider::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #3b82f6;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

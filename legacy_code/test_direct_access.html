@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Direct Doctor Link Test</title>
+</head>
+<body>
+    <h1>Doctor Dashboard Link Test</h1>
+    <p>Test the doctor authentication flow:</p>
+    
+    <div>
+        <h3>Step 1: Check Authentication Status</h3>
+        <button onclick="checkAuth()">Check Auth Status</button>
+        <div id="authStatus"></div>
+    </div>
+    
+    <div>
+        <h3>Step 2: Test Doctor Link</h3>
+        <a href="http://localhost:5000/doctor" target="_blank">Open Doctor Dashboard</a>
+    </div>
+    
+    <script>
+        async function checkAuth() {
+            try {
+                const response = await fetch('/api/auth/me', {
+                    credentials: 'include'
+                });
+                const data = await response.json();
+                document.getElementById('authStatus').innerHTML = 
+                    `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+            } catch (error) {
+                document.getElementById('authStatus').innerHTML = 
+                    `Error: ${error.message}`;
+            }
+        }
+        
+        // Auto-check on load
+        checkAuth();
+    </script>
+</body>
+</html>

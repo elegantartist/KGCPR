@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="kgcGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2E8BC0"/>
+      <stop offset="100%" style="stop-color:#1e5f8f"/>
+    </linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="58" fill="url(#kgcGradient)" stroke="#fff" stroke-width="4"/>
+  <text x="60" y="45" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="bold">KGC</text>
+  <text x="60" y="82" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">Keep Going Care</text>
+</svg>

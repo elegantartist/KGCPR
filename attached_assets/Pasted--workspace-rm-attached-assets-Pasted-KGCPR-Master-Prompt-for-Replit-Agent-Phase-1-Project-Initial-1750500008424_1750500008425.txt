@@ -1,0 +1,115 @@
+~/workspace$ rm "attached_assets/Pasted-KGCPR-Master-Prompt-for-Replit-Agent-Phase-1-Project-Initialization-Objective-Your-objective-i-1750470198657_1750470198660.txt"
+git add .
+git commit -m "Remove file containing personal access token"
+git push -u origin main
+[main 965d299] Remove file containing personal access token
+ 2 files changed, 40 insertions(+), 2527 deletions(-)
+ create mode 100644 attached_assets/Pasted--workspace-git-remote-set-url-origin-https-elegantartist-github-com-elegantartist-KGCPR-git-w-1750499875243_1750499875243.txt
+ delete mode 100644 attached_assets/Pasted-KGCPR-Master-Prompt-for-Replit-Agent-Phase-1-Project-Initialization-Objective-Your-objective-i-1750470198657_1750470198660.txt
+Enumerating objects: 210, done.
+Counting objects: 100% (210/210), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (171/171), done.
+Writing objects: 100% (187/187), 119.79 KiB | 5.99 MiB/s, done.
+Total 187 (delta 110), reused 5 (delta 3), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (110/110), completed with 9 local objects.
+remote: error: GH013: Repository rule violations found for refs/heads/main.
+remote: 
+remote: - GITHUB PUSH PROTECTION
+remote:   —————————————————————————————————————————
+remote:     Resolve the following violations before pushing again
+remote: 
+remote:     - Push cannot contain secrets
+remote: 
+remote:     
+remote:      (?) Learn how to resolve a blocked push
+remote:      https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push
+remote:     
+remote:      (?) This repository does not have Secret Scanning enabled, but is eligible. Enable Secret Scanning to view and manage detected secrets.
+remote:      Visit the repository settings page, https://github.com/elegantartist/KGCPR/settings/security_analysis
+remote:     
+remote:     
+remote:       —— GitHub Personal Access Token ——————————————————————
+remote:        locations:
+remote:          - commit: 965d299c941296290cb9376cf972f0e82fdbaf35
+remote:            path: attached_assets/Pasted--workspace-git-remote-set-url-origin-https-elegantartist-github-com-elegantartist-KGCPR-git-w-1750499875243_1750499875243.txt:2
+remote:     
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.
+remote:        https://github.com/elegantartist/KGCPR/security/secret-scanning/unblock-secret/2yoTSl55RLXbfEEYHlX38dLEceT
+remote:     
+remote:     
+remote:       —— GitHub Personal Access Token ——————————————————————
+remote:        locations:
+remote:          - commit: b733ad25d7afac2f4c4df13ac1df39ead8b38797
+remote:            path: attached_assets/Pasted-KGCPR-Master-Prompt-for-Replit-Agent-Phase-1-Project-Initialization-Objective-Your-objective-i-1750470198657_1750470198660.txt:2516
+remote:     
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.
+remote:        https://github.com/elegantartist/KGCPR/security/secret-scanning/unblock-secret/2ynJmoWmYekpfXT49RvQhAMslbr
+remote:     
+remote: 
+remote: 
+To https://github.com/elegantartist/KGCPR.git
+ ! [remote rejected] main -> main (push declined due to repository rule violations)
+error: failed to push some refs to 'https://github.com/elegantartist/KGCPR.git'
+~/workspace$ # Remove the entire attached_assets folder to eliminate all token exposures 
+rm -rf attached_assets/
+
+# Add the changes and commit
+git add .
+git commit -m "Remove attached assets containing tokens"
+
+# Push to GitHub
+git push -u origin main
+[main 91ff5e3] Remove attached assets containing tokens
+ 5 files changed, 441 deletions(-)
+ delete mode 100644 attached_assets/Pasted--workspace-git-remote-set-url-origin-https-elegantartist-github-com-elegantartist-KGCPR-git-w-1750499875243_1750499875243.txt
+ delete mode 100644 attached_assets/Pasted-ADR-028-Apply-Definitive-HMR-Configuration-Patch-Date-2025-06-21-Status-Proposed-Context-Despit-1750495875303_1750495875305.txt
+ delete mode 100644 attached_assets/Pasted-Master-Prompt-for-Replit-Agent-Phase-26-The-Final-Disciplined-Reset-Objective-Your-objective-is-1750494846991_1750494846992.txt
+ delete mode 100644 attached_assets/Pasted-Master-Prompt-for-Replit-Agent-Phase-27-Configure-and-Verify-Full-Stack-Objective-Your-objective-1750495386157_1750495386158.txt
+ delete mode 100644 attached_assets/Pasted-Master-Prompt-for-Replit-Agent-Phase-30-The-Integrated-Server-Mandate-Objective-You-will-reconfi-1750497384913_1750497384914.txt
+Enumerating objects: 212, done.
+Counting objects: 100% (212/212), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (173/173), done.
+Writing objects: 100% (189/189), 119.98 KiB | 3.75 MiB/s, done.
+Total 189 (delta 111), reused 5 (delta 3), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (111/111), completed with 9 local objects.
+remote: error: GH013: Repository rule violations found for refs/heads/main.
+remote: 
+remote: - GITHUB PUSH PROTECTION
+remote:   —————————————————————————————————————————
+remote:     Resolve the following violations before pushing again
+remote: 
+remote:     - Push cannot contain secrets
+remote: 
+remote:     
+remote:      (?) Learn how to resolve a blocked push
+remote:      https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push
+remote:     
+remote:      (?) This repository does not have Secret Scanning enabled, but is eligible. Enable Secret Scanning to view and manage detected secrets.
+remote:      Visit the repository settings page, https://github.com/elegantartist/KGCPR/settings/security_analysis
+remote:     
+remote:     
+remote:       —— GitHub Personal Access Token ——————————————————————
+remote:        locations:
+remote:          - commit: 965d299c941296290cb9376cf972f0e82fdbaf35
+remote:            path: attached_assets/Pasted--workspace-git-remote-set-url-origin-https-elegantartist-github-com-elegantartist-KGCPR-git-w-1750499875243_1750499875243.txt:2
+remote:     
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.
+remote:        https://github.com/elegantartist/KGCPR/security/secret-scanning/unblock-secret/2yoTSl55RLXbfEEYHlX38dLEceT
+remote:     
+remote:     
+remote:       —— GitHub Personal Access Token ——————————————————————
+remote:        locations:
+remote:          - commit: b733ad25d7afac2f4c4df13ac1df39ead8b38797
+remote:            path: attached_assets/Pasted-KGCPR-Master-Prompt-for-Replit-Agent-Phase-1-Project-Initialization-Objective-Your-objective-i-1750470198657_1750470198660.txt:2516
+remote:     
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.
+remote:        https://github.com/elegantartist/KGCPR/security/secret-scanning/unblock-secret/2ynJmoWmYekpfXT49RvQhAMslbr
+remote:     
+remote: 
+remote: 
+To https://github.com/elegantartist/KGCPR.git
+ ! [remote rejected] main -> main (push declined due to repository rule violations)
+error: failed to push some refs to 'https://github.com/elegantartist/KGCPR.git'
+~/workspace$ 

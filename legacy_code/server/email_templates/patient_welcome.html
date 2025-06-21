@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Keep Going Care</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 0;
+        }
+        .header {
+            background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+        .logo-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 12px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .logo {
+            width: 120px;
+            height: auto;
+            display: block;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+            color: white;
+        }
+        .subtitle {
+            margin: 8px 0 0 0;
+            font-size: 16px;
+            opacity: 0.9;
+            color: white;
+        }
+        .content {
+            padding: 30px;
+        }
+        .greeting {
+            font-size: 20px;
+            color: #4A90E2;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        .section h3 {
+            color: #333;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .section p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .feature-list {
+            margin: 15px 0;
+        }
+        .feature-list li {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .feature-list strong {
+            color: #333;
+            font-weight: 600;
+        }
+        .video-button {
+            background-color: #4A90E2;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 500;
+            margin: 15px 0;
+        }
+        .terms-box {
+            background-color: #FFF8DC;
+            border: 1px solid #DEB887;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        .terms-box h4 {
+            color: #8B4513;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0 0 15px 0;
+        }
+        .terms-box p {
+            color: #8B4513;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        .terms-list {
+            margin: 15px 0;
+        }
+        .terms-list li {
+            color: #8B4513;
+            font-size: 14px;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .terms-list strong {
+            font-weight: 600;
+        }
+        .access-button {
+            background-color: #5CB85C;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 6px;
+            display: inline-block;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .security-note {
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            margin: 15px 0;
+        }
+        .footer {
+            padding: 20px 30px;
+            border-top: 1px solid #eee;
+        }
+        .footer p {
+            color: #666;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        .footer .signature {
+            font-weight: 600;
+            color: #333;
+        }
+        .footer .company {
+            color: #666;
+            font-style: italic;
+        }
+        .copyright {
+            text-align: center;
+            color: #999;
+            font-size: 11px;
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header with KGC Branding -->
+        <div class="header">
+            <div class="logo-container">
+                <img src="{{KGC_LOGO_BASE64}}" alt="KGC Logo" class="logo">
+            </div>
+            <h1>Welcome to Keep Going Care!</h1>
+            <p class="subtitle">Your Partner in a Healthier Lifestyle</p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <div class="greeting">Hi {{patientName}},</div>
+
+            <div class="section">
+                <p>Welcome to <strong>Keep Going Care (KGC)</strong>! Your doctor has recommended KGC as a supportive tool to help you manage your metabolic health and work towards a healthier lifestyle. We're here to help you reduce your risk of heart attack and stroke identified by your doctor, by making positive changes you can stick with based on your doctor's care plan designed for you.</p>
+            </div>
+
+            <div class="section">
+                <h3>What KGC Is:</h3>
+                <p>Think of KGC as your friendly, personalised health assistant, available right on your device. It's a system designed to support you with educational advice and motivation for diet, exercise, and taking your medication as prescribed by your doctor.</p>
+            </div>
+
+            <div class="section">
+                <h3>How KGC Works for You:</h3>
+                <p>KGC uses the plan your doctor has set for you (called Care Plan Directives, or CPDs), along with trusted Australian health information and your own preferences, to give you advice and ideas using supportive techniques.</p>
+
+                <p>You'll interact with our main assistant, who can help you with:</p>
+
+                <ul class="feature-list">
+                    <li><strong>Personalised Support:</strong> Get tips and ideas tailored to your doctor's plan for your diet, exercise, and medication routine.</li>
+                    
+                    <li><strong>Motivation When You Need It:</strong> Use the special "Keep Going" button. If you're feeling stressed, tempted, or losing motivation, tapping this button will bring up your personal motivational image, a calming video, and a breathing exercise to help you refocus.</li>
+                    
+                    <li><strong>Inspiration:</strong> Find ideas for healthy recipes or new exercise routines that fit your preferences and fitness level (safely!).</li>
+                    
+                    <li><strong>Connecting Locally:</strong> Discover local gyms, yoga studios, or personal trainers if that's something you're interested in exploring.</li>
+                    
+                    <li><strong>Daily Check-in:</strong> We'll ask you each day to quickly rate how you feel you're going with your diet, exercise/wellness routine, and medication (on a scale of 1 to 10). This helps KGC understand how to best support you and keeps your doctor informed of your progress with their care plan (CPDs).</li>
+                </ul>
+
+                <a href="https://youtu.be/ET8aoaQjJn0" class="video-button">📹 Watch How KGC Can Help You</a>
+            </div>
+
+            <div class="terms-box">
+                <h4>Terms and Conditions Agreement Required</h4>
+                
+                <p><strong>Terms and Conditions Summary:</strong><br>
+                By using Keep Going Care, you agree to our Terms and Conditions. Please note the following key points:</p>
+
+                <ul class="terms-list">
+                    <li><strong>Your Health Data:</strong> We take your privacy seriously. Your private health data is managed securely in accordance with all relevant Australian state and federal privacy laws.</li>
+                    
+                    <li><strong>Educational Support Only:</strong> Keep Going Care is designed to provide you with educational information and support for managing your lifestyle. It is not a tool for diagnosing health problems or providing medical treatment. Always consult with your doctor or other healthcare professionals for any health concerns or before making decisions about your treatment.</li>
+                    
+                    <li><strong>About the Information Provided:</strong> KGC uses advanced technology, including AI. While we strive for accuracy, sometimes the information generated by AI can be incorrect. The information provided by Keep Going Care is for your guidance and motivation only. It should not replace advice from your doctor, and you should always check with a healthcare professional if you are unsure about anything related to your health or care plan.</li>
+                    
+                    <li><strong>Not for Emergencies:</strong> Keep Going Care cannot help in a medical emergency. If you are experiencing a medical emergency like chest pain, severe difficulty breathing, or thoughts of harming yourself, please call Triple Zero (000) immediately or go to your nearest hospital emergency department.</li>
+                </ul>
+
+                <p><strong>By using Keep Going Care, you confirm that you have read and agree to these terms.</strong></p>
+            </div>
+
+            <div style="text-align: center;">
+                <p>We're genuinely here to support you every step of the way. Let's Keep Going together!</p>
+                
+                <a href="{{accessLink}}" class="access-button">🔒 Access Your KGC Application</a>
+                
+                <p class="security-note">Secure login with SMS verification for your privacy and security.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Best regards,</p>
+            <p class="signature">The Keep Going Care Team</p>
+            <p class="company">Anthrocyti AI Pty Ltd</p>
+        </div>
+
+        <div class="copyright">
+            © 2025 Keep Going Care. All rights reserved.<br>
+            This is a secure, TGA-compliant healthcare communication.
+        </div>
+    </div>
+</body>
+</html>

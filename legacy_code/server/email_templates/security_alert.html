@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Alert - Suspicious Activity</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #f8f9fa; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; }
+        .content { background: #fff; padding: 30px; border: 1px solid #ddd; }
+        .danger { background: #f8d7da; border: 1px solid #f5c6cb; padding: 15px; border-radius: 5px; margin: 20px 0; }
+        .footer { background: #f8f9fa; padding: 20px; text-align: center; border-radius: 0 0 8px 8px; font-size: 12px; color: #666; }
+        .logo { max-width: 150px; }
+        .btn { background: #dc3545; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block; margin: 15px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://via.placeholder.com/150x60/2E8BC0/ffffff?text=KGC" alt="Keep Going Care" class="logo">
+            <h1 style="color: #dc3545; margin: 10px 0 0 0;">Security Alert</h1>
+        </div>
+        
+        <div class="content">
+            <div class="danger">
+                <strong>🚨 Suspicious Activity Detected</strong>
+            </div>
+            
+            <p>Hello {{name}},</p>
+            
+            <p>We detected suspicious activity on your Keep Going Care account:</p>
+            
+            <ul>
+                <li><strong>Time:</strong> {{timestamp}}</li>
+                <li><strong>Activity:</strong> {{action}}</li>
+            </ul>
+            
+            <p><strong>Immediate Actions Required:</strong></p>
+            <ol>
+                <li>Change your password immediately</li>
+                <li>Review recent account activity</li>
+                <li>Enable two-factor authentication if not already enabled</li>
+                <li>Contact support if you notice any unauthorized changes</li>
+            </ol>
+            
+            <a href="mailto:support@keepgoing.care" class="btn">Contact Support Immediately</a>
+            
+            <p>If you believe your account has been compromised, please contact our security team immediately.</p>
+            
+            <p>Best regards,<br>
+            The Keep Going Care Security Team</p>
+        </div>
+        
+        <div class="footer">
+            <p>Keep Going Care | Health Management Platform</p>
+            <p>This is an automated security alert. Please do not reply to this email.</p>
+        </div>
+    </div>
+</body>
+</html>

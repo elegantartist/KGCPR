@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Alert - Account Logout</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #f8f9fa; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; }
+        .content { background: #fff; padding: 30px; border: 1px solid #ddd; }
+        .alert { background: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 5px; margin: 20px 0; }
+        .footer { background: #f8f9fa; padding: 20px; text-align: center; border-radius: 0 0 8px 8px; font-size: 12px; color: #666; }
+        .logo { max-width: 150px; }
+        .btn { background: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block; margin: 15px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://via.placeholder.com/150x60/2E8BC0/ffffff?text=KGC" alt="Keep Going Care" class="logo">
+            <h1 style="color: #2E8BC0; margin: 10px 0 0 0;">Security Alert</h1>
+        </div>
+        
+        <div class="content">
+            <div class="alert">
+                <strong>⚠️ Account Logout Detected</strong>
+            </div>
+            
+            <p>Hello {{name}},</p>
+            
+            <p>We're writing to inform you that your Keep Going Care account was logged out on:</p>
+            
+            <ul>
+                <li><strong>Time:</strong> {{timestamp}}</li>
+                <li><strong>IP Address:</strong> {{ipAddress}}</li>
+                <li><strong>Device:</strong> {{userAgent}}</li>
+            </ul>
+            
+            <p>If this logout was initiated by you, no further action is required.</p>
+            
+            <p><strong>If you did not log out:</strong></p>
+            <ul>
+                <li>Your account may have been accessed by someone else</li>
+                <li>Please log back in and change your password immediately</li>
+                <li>Contact our support team if you suspect unauthorized access</li>
+            </ul>
+            
+            <a href="mailto:support@keepgoing.care" class="btn">Contact Support</a>
+            
+            <p>Thank you for keeping your account secure.</p>
+            
+            <p>Best regards,<br>
+            The Keep Going Care Security Team</p>
+        </div>
+        
+        <div class="footer">
+            <p>Keep Going Care | Health Management Platform</p>
+            <p>This is an automated security notification. Please do not reply to this email.</p>
+        </div>
+    </div>
+</body>
+</html>
