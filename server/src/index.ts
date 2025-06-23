@@ -1,22 +1,136 @@
 import express, { Request, Response } from 'express';
 import path from 'path';
+import session from 'express-session';
 
 const app = express();
-// Use the PORT environment variable provided by Replit, or default to 3001
-const PORT = process.env.PORT || 3001;
+const PORT = parseInt(process.env.PORT || '5000', 10);
 
-// --- API Routes ---
+// Simplified session configuration
+const sessionConfig = {
+  secret: process.env.SESSION_SECRET || 'keepgoingcare-dev-secret-2025',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+    httpOnly: true,
+    secure: false, // Set to true in production with HTTPS
+  },
+};
+
+declare module 'express-session' {
+  interface SessionData {
+    userId?: number;
+    role?: string;
+    loginCode?: string;
+    loginEmail?: string;
+  }
+}
+
+app.use(session(sessionConfig));
+app.use(express.json());
+
+// --- Authentication Routes ---
+// Request login code
+app.post('/api/auth/request-login', async (req: Request, res: Response) => {
+  const { email } = req.body;
+  
+  if (!email) {
+    return res.status(400).json({ error: 'Email is required' });
+  }
+
+  // Generate 6-digit code
+  const code = Math.floor(100000 + Math.random() * 900000).toString();
+  
+  // In development, return the code directly
+  console.log(`Login code for ${email}: ${code}`);
+  
+  // Store code temporarily
+  (req.session as any).loginCode = code;
+  (req.session as any).loginEmail = email;
+  
+  res.json({ 
+    message: 'Verification code sent',
+    code: process.env.NODE_ENV === 'development' ? code : undefined
+  });
+});
+
+// Verify login code
+app.post('/api/auth/verify-login', async (req: Request, res: Response) => {
+  const { email, code } = req.body;
+  
+  if (!email || !code) {
+    return res.status(400).json({ error: 'Email and code are required' });
+  }
+
+  if ((req.session as any).loginCode !== code || (req.session as any).loginEmail !== email) {
+    return res.status(400).json({ error: 'Invalid verification code' });
+  }
+
+  // Clear the temporary login data
+  delete (req.session as any).loginCode;
+  delete (req.session as any).loginEmail;
+
+  // Handle the admin user specifically
+  let user;
+  if (email === 'admin@keepgoingcare.com') {
+    req.session.userId = 1;
+    req.session.role = 'admin';
+    user = {
+      id: 1,
+      email: email,
+      role: 'admin' as const
+    };
+  } else {
+    // For other users, default to patient role
+    req.session.userId = 2;
+    req.session.role = 'patient';
+    user = {
+      id: 2,
+      email: email,
+      role: 'patient' as const
+    };
+  }
+
+  res.json({ user });
+});
+
+// Logout
+app.post('/api/auth/logout', (req: Request, res: Response) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).json({ error: 'Failed to logout' });
+    }
+    res.json({ message: 'Logged out successfully' });
+  });
+});
+
+// Check session endpoint
+app.get('/api/auth/session', (req: Request, res: Response) => {
+  if (req.session.userId) {
+    let email = 'user@example.com';
+    if (req.session.userId === 1) {
+      email = 'admin@keepgoingcare.com';
+    }
+    
+    const user = {
+      id: req.session.userId,
+      email: email,
+      role: req.session.role || 'patient'
+    };
+    res.json({ user });
+  } else {
+    res.status(401).json({ error: 'No active session' });
+  }
+});
+
 app.get('/api/health', (req: Request, res: Response) => {
-  res.status(200).send({ status: 'Integrated server is running' });
+  res.status(200).send({ status: 'Integrated server is running with session management and auth routes' });
 });
 
 // --- Static Asset Serving ---
-// This serves the built React app from the client/dist folder
 app.use(express.static(path.join(__dirname, '..', '..', 'client', 'dist')));
 
 // --- Client-Side Routing Fallback ---
-// For any request that doesn't match an API route or a static file,
-// send the main index.html file. This is crucial for React Router.
 app.get('*', (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, '..', '..', 'client', 'dist', 'index.html'));
 });
