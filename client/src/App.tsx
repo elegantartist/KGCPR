@@ -112,13 +112,13 @@ function App() {
 
   if (user) {
     return (
-      <div className="min-h-screen bg-gray-50 p-8">
+      <div className="min-h-screen bg-white p-8">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-lg shadow-sm border p-6">
             <div className="flex justify-between items-center mb-6">
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Keep Going Care</h1>
-                <p className="text-gray-600 mt-1">Welcome back, {user.email}</p>
+                <h1 className="text-2xl font-bold text-black">Keep Going Care</h1>
+                <p className="text-black mt-1">Welcome back, {user.email}</p>
               </div>
               <button 
                 onClick={handleLogout}
@@ -129,9 +129,9 @@ function App() {
             </div>
             
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <h2 className="text-lg font-semibold text-blue-900 mb-2">Dashboard</h2>
-              <p className="text-blue-800">Role: <span className="font-medium capitalize">{user.role}</span></p>
-              <p className="text-blue-800 mt-1">User ID: {user.id}</p>
+              <h2 className="text-lg font-semibold text-black mb-2">Dashboard</h2>
+              <p className="text-black">Role: <span className="font-medium capitalize">{user.role}</span></p>
+              <p className="text-black mt-1">User ID: {user.id}</p>
             </div>
           </div>
         </div>
@@ -173,17 +173,17 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-white flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="bg-white rounded-lg shadow-sm border p-8">
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-semibold text-gray-900 mb-2">
+            <h1 className="text-2xl font-semibold text-black mb-2">
               Keep Going Care
             </h1>
-            <p className="text-gray-600 text-sm">
+            <p className="text-black text-sm">
               Sign in to your account
             </p>
-          </div>
+          </div></div>
 
           {error && (
             <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md">
@@ -199,8 +199,8 @@ function App() {
                 onClick={() => setActiveTab(tab)}
                 className={`flex-1 py-2 px-4 text-sm font-medium rounded-md transition-colors ${
                   activeTab === tab
-                    ? 'bg-white text-gray-900 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900'
+                    ? 'bg-white text-black shadow-sm'
+                    : 'text-black hover:text-black'
                 }`}
               >
                 {tab}
@@ -211,7 +211,7 @@ function App() {
           {!showCodeInput ? (
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="email" className="block text-sm font-medium text-black mb-2">
                   Email Address
                 </label>
                 <input
@@ -219,7 +219,7 @@ function App() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
                   placeholder="Enter your email"
                   required
                 />
@@ -236,7 +236,7 @@ function App() {
           ) : (
             <form onSubmit={handleVerifyCode} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-black mb-2">
                   Verification Code
                 </label>
                 <input
@@ -244,10 +244,10 @@ function App() {
                   value={code}
                   onChange={(e) => setCode(e.target.value)}
                   placeholder="Enter 6-digit code"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
                   required
                 />
-                <p className="text-sm text-gray-500 mt-1">
+                <p className="text-sm text-black mt-1">
                   Code sent to {email}
                 </p>
               </div>
@@ -265,7 +265,7 @@ function App() {
                   setCode('');
                   setError('');
                 }}
-                className="w-full mt-2 py-2 px-4 text-gray-600 hover:text-gray-800 font-medium transition-colors"
+                className="w-full mt-2 py-2 px-4 text-black hover:text-gray-800 font-medium transition-colors"
               >
                 Back to Email
               </button>
