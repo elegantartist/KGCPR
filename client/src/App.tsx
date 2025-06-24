@@ -36,7 +36,7 @@ function App() {
     }
   };
 
-  const handleRequestCode = async (e: React.FormEvent) => {
+  const handleRequestLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setIsSubmitting(true);
@@ -139,7 +139,7 @@ function App() {
     );
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleVerifySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setIsSubmitting(true);
@@ -209,7 +209,7 @@ function App() {
           </div>
 
           {!showCodeInput ? (
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleRequestLogin} className="space-y-6">
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-black mb-2">
                   Email Address
