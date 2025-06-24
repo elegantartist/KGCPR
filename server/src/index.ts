@@ -150,6 +150,6 @@ const serveApp: RequestHandler = (req: Request, res: Response) => {
 
 app.get('*', serveApp);
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`KGCPR Integrated Server is now listening on port ${PORT}`);
 });
