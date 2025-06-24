@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
+import { useState, useEffect } from 'react';
 
 interface User {
   id: number;
@@ -10,7 +9,7 @@ interface User {
 function App() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'Patient' | 'Doctor' | 'Admin'>('Patient');
+  const [activeTab, setActiveTab] = useState<'admin' | 'doctor' | 'patient'>('patient');
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
   const [showCodeInput, setShowCodeInput] = useState(false);
@@ -36,7 +35,7 @@ function App() {
     }
   };
 
-  const handleRequestLogin = async (e: React.FormEvent) => {
+  const handleRequestCode = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setIsSubmitting(true);
@@ -104,34 +103,34 @@ function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="text-lg text-black">Loading...</div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-lg">Loading...</div>
       </div>
     );
   }
 
   if (user) {
     return (
-      <div className="min-h-screen bg-gray-100 p-8">
+      <div className="min-h-screen bg-gray-50 p-8">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white rounded-lg shadow-sm border p-6">
             <div className="flex justify-between items-center mb-6">
               <div>
-                <h1 className="text-2xl font-bold text-black">Keep Going Care</h1>
+                <h1 className="text-2xl font-bold text-gray-900">Keep Going Care</h1>
                 <p className="text-gray-600 mt-1">Welcome back, {user.email}</p>
               </div>
               <button 
                 onClick={handleLogout}
-                className="px-4 py-2 text-sm bg-gray-200 hover:bg-gray-300 text-black rounded-md transition-colors"
+                className="px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
               >
                 Logout
               </button>
             </div>
             
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <h2 className="text-lg font-semibold text-black mb-2">Dashboard</h2>
-              <p className="text-gray-600">Role: <span className="font-medium capitalize text-black">{user.role}</span></p>
-              <p className="text-gray-600 mt-1">User ID: {user.id}</p>
+              <h2 className="text-lg font-semibold text-blue-900 mb-2">Dashboard</h2>
+              <p className="text-blue-800">Role: <span className="font-medium capitalize">{user.role}</span></p>
+              <p className="text-blue-800 mt-1">User ID: {user.id}</p>
             </div>
           </div>
         </div>
@@ -139,50 +138,30 @@ function App() {
     );
   }
 
-  const handleVerifySubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    setIsSubmitting(true);
-
-    try {
-      const response = await fetch('/api/auth/request-login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await response.json();
-      if (!response.ok) {
-          setError(data.error || 'Failed to send verification code');
-      } else {
-          setShowCodeInput(true);
-          if (data.code) {
-            setCode(data.code);
-          }
-      }
-
-      console.log('Login request sent:', data);
-    } catch (error) {
-      setError('Network error occurred');
-      console.error('Login request failed:', error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
-          <div className="text-center mb-8">
-            <h1 className="text-2xl font-semibold text-black mb-2">
-              Keep Going Care
-            </h1>
-            <p className="text-gray-600 text-sm">
-              Sign in to your account
-            </p>
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-sm">
+        <div className="bg-white rounded-xl shadow-md p-8">
+          <div className="text-center mb-6">
+            <h1 className="text-2xl font-semibold text-gray-900 mb-1">Keep Going Care</h1>
+            <p className="text-sm text-gray-500">Sign in to your account</p>
+          </div>
+
+          {/* Role Selection Tabs */}
+          <div className="flex rounded-lg bg-gray-100 p-1 mb-6">
+            {(['Patient', 'Doctor', 'Admin'] as const).map((role) => (
+              <button
+                key={role}
+                onClick={() => setActiveTab(role.toLowerCase() as 'patient' | 'doctor' | 'admin')}
+                className={`flex-1 py-2 px-3 text-sm font-medium rounded-md transition-colors ${
+                  activeTab === role.toLowerCase()
+                    ? 'bg-white text-gray-900 shadow-sm'
+                    : 'text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                {role}
+              </button>
+            ))}
           </div>
 
           {error && (
@@ -191,44 +170,25 @@ function App() {
             </div>
           )}
 
-          {/* Tabs */}
-          <div className="flex mb-6 bg-gray-100 rounded-lg p-1">
-            {(['Patient', 'Doctor', 'Admin'] as const).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`flex-1 py-2 px-4 text-sm font-medium rounded-md transition-colors ${
-                  activeTab === tab
-                    ? 'bg-white text-black shadow-sm'
-                    : 'text-gray-600 hover:text-black'
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
-
           {!showCodeInput ? (
-            <form onSubmit={handleRequestLogin} className="space-y-6">
+            <form onSubmit={handleRequestCode} className="space-y-4">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-black mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Email Address
                 </label>
                 <input
-                  id="email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
-                  placeholder="Enter your email"
+                  placeholder={activeTab === 'admin' ? 'admin@keepgoingcare.com' : 'Enter your email'}
+                  className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
                   required
                 />
               </div>
-
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-blue-600 text-white py-2 px-4 rounded-md font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="w-full py-3 px-4 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-400 text-white font-medium rounded-lg transition-colors"
               >
                 {isSubmitting ? 'Sending...' : 'Send Verification Code'}
               </button>
@@ -236,7 +196,7 @@ function App() {
           ) : (
             <form onSubmit={handleVerifyCode} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-black mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Verification Code
                 </label>
                 <input
@@ -244,17 +204,17 @@ function App() {
                   value={code}
                   onChange={(e) => setCode(e.target.value)}
                   placeholder="Enter 6-digit code"
-                  className="w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
+                  className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
                   required
                 />
-                <p className="text-sm text-gray-600 mt-1">
+                <p className="text-sm text-gray-500 mt-1">
                   Code sent to {email}
                 </p>
               </div>
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-blue-600 text-white py-2 px-4 rounded-md font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="w-full py-3 px-4 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-400 text-white font-medium rounded-lg transition-colors"
               >
                 {isSubmitting ? 'Verifying...' : 'Verify Code'}
               </button>
@@ -265,7 +225,7 @@ function App() {
                   setCode('');
                   setError('');
                 }}
-                className="w-full mt-2 py-2 px-4 text-gray-600 hover:text-black font-medium transition-colors"
+                className="w-full mt-2 py-3 px-4 text-gray-600 hover:text-gray-800 font-medium transition-colors"
               >
                 Back to Email
               </button>
