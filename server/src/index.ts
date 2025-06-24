@@ -1,8 +1,6 @@
-import express from 'express';
+import express, { Request, Response, RequestHandler } from 'express';
 import path from 'path';
 import session from 'express-session';
-
-import type { Request, Response } from 'express';
 
 const app = express();
 const PORT = parseInt(process.env.PORT || '5000', 10);
@@ -32,11 +30,12 @@ app.use(session(sessionConfig));
 app.use(express.json());
 
 // Request login code
-app.post('/api/auth/request-login', async (req: Request, res: Response) => {
+const requestLogin: RequestHandler = async (req: Request, res: Response) => {
   const { email } = req.body;
   
   if (!email) {
-    return res.status(400).json({ error: 'Email is required' });
+    res.status(400).json({ error: 'Email is required' });
+    return;
   }
 
   // Generate 6-digit code
@@ -53,18 +52,22 @@ app.post('/api/auth/request-login', async (req: Request, res: Response) => {
     message: 'Verification code sent',
     code: process.env.NODE_ENV === 'development' ? code : undefined
   });
-});
+};
+
+app.post('/api/auth/request-login', requestLogin);
 
 // Verify login code
-app.post('/api/auth/verify-login', async (req: Request, res: Response) => {
+const verifyLogin: RequestHandler = async (req: Request, res: Response) => {
   const { email, code } = req.body;
   
   if (!email || !code) {
-    return res.status(400).json({ error: 'Email and code are required' });
+    res.status(400).json({ error: 'Email and code are required' });
+    return;
   }
 
   if (req.session.loginCode !== code || req.session.loginEmail !== email) {
-    return res.status(400).json({ error: 'Invalid verification code' });
+    res.status(400).json({ error: 'Invalid verification code' });
+    return;
   }
 
   // Clear the temporary login data
@@ -93,20 +96,25 @@ app.post('/api/auth/verify-login', async (req: Request, res: Response) => {
   }
 
   res.json({ user });
-});
+};
+
+app.post('/api/auth/verify-login', verifyLogin);
 
 // Logout
-app.post('/api/auth/logout', (req: Request, res: Response) => {
+const logout: RequestHandler = (req: Request, res: Response) => {
   req.session.destroy((err) => {
     if (err) {
-      return res.status(500).json({ error: 'Failed to logout' });
+      res.status(500).json({ error: 'Failed to logout' });
+      return;
     }
     res.json({ message: 'Logged out successfully' });
   });
-});
+};
+
+app.post('/api/auth/logout', logout);
 
 // Check session endpoint
-app.get('/api/auth/session', (req: Request, res: Response) => {
+const checkSession: RequestHandler = (req: Request, res: Response) => {
   if (req.session.userId) {
     let email = 'user@example.com';
     if (req.session.userId === 1) {
@@ -122,19 +130,25 @@ app.get('/api/auth/session', (req: Request, res: Response) => {
   } else {
     res.status(401).json({ error: 'No active session' });
   }
-});
+};
 
-app.get('/api/health', (req: Request, res: Response) => {
+app.get('/api/auth/session', checkSession);
+
+const healthCheck: RequestHandler = (req: Request, res: Response) => {
   res.status(200).send({ status: 'Keep Going Care server running with authentication' });
-});
+};
+
+app.get('/api/health', healthCheck);
 
 // Static file serving
 app.use(express.static(path.join(__dirname, '..', '..', 'client', 'dist')));
 
 // Client-side routing fallback
-app.get('*', (req: Request, res: Response) => {
+const serveApp: RequestHandler = (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, '..', '..', 'client', 'dist', 'index.html'));
-});
+};
+
+app.get('*', serveApp);
 
 app.listen(PORT, () => {
   console.log(`KGCPR Integrated Server is now listening on port ${PORT}`);
