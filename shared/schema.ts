@@ -81,20 +81,9 @@ export const chatSessions = pgTable('chat_sessions', {
   lastActivity: timestamp('last_activity').defaultNow().notNull(),
 });
 
-// Insert schemas
-export const insertUserSchema = createInsertSchema(users);
-export const insertPatientScoreSchema = createInsertSchema(patientScores);
-export const insertPatientBadgeSchema = createInsertSchema(patientBadges);
-export const insertDoctorSchema = createInsertSchema(doctors);
-export const insertCarePlanDirectiveSchema = createInsertSchema(carePlanDirectives);
-export const insertSupervisorAgentLogSchema = createInsertSchema(supervisorAgentLogs);
-export const insertChatSessionSchema = createInsertSchema(chatSessions);
-
 // Types
 export type User = typeof users.$inferSelect;
-export type InsertUser = z.infer<typeof insertUserSchema>;
 export type PatientScore = typeof patientScores.$inferSelect;
-export type InsertPatientScore = z.infer<typeof insertPatientScoreSchema>;
 export type PatientBadge = typeof patientBadges.$inferSelect;
 export type Doctor = typeof doctors.$inferSelect;
 export type CarePlanDirective = typeof carePlanDirectives.$inferSelect;
