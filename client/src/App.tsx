@@ -112,26 +112,26 @@ function App() {
 
   if (user) {
     return (
-      <div className="min-h-screen bg-white p-8">
+      <div className="min-h-screen bg-gray-900 p-8">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-lg shadow-sm border p-6">
+          <div className="bg-gray-800 rounded-lg shadow-sm border border-gray-700 p-6">
             <div className="flex justify-between items-center mb-6">
               <div>
-                <h1 className="text-2xl font-bold text-black">Keep Going Care</h1>
-                <p className="text-black mt-1">Welcome back, {user.email}</p>
+                <h1 className="text-2xl font-bold text-white">Keep Going Care</h1>
+                <p className="text-gray-300 mt-1">Welcome back, {user.email}</p>
               </div>
               <button 
                 onClick={handleLogout}
-                className="px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
+                className="px-4 py-2 text-sm bg-gray-700 hover:bg-gray-600 text-white rounded-md transition-colors"
               >
                 Logout
               </button>
             </div>
             
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <h2 className="text-lg font-semibold text-black mb-2">Dashboard</h2>
-              <p className="text-black">Role: <span className="font-medium capitalize">{user.role}</span></p>
-              <p className="text-black mt-1">User ID: {user.id}</p>
+            <div className="bg-blue-900/30 border border-blue-700 rounded-lg p-4">
+              <h2 className="text-lg font-semibold text-white mb-2">Dashboard</h2>
+              <p className="text-gray-300">Role: <span className="font-medium capitalize text-white">{user.role}</span></p>
+              <p className="text-gray-300 mt-1">User ID: {user.id}</p>
             </div>
           </div>
         </div>
@@ -173,17 +173,17 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        <div className="bg-white rounded-lg shadow-sm border p-8">
+        <div className="bg-gray-800 rounded-lg shadow-sm border border-gray-700 p-8">
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-semibold text-black mb-2">
+            <h1 className="text-2xl font-semibold text-white mb-2">
               Keep Going Care
             </h1>
-            <p className="text-black text-sm">
+            <p className="text-gray-300 text-sm">
               Sign in to your account
             </p>
-          </div></div>
+          </div>
 
           {error && (
             <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md">
@@ -192,15 +192,15 @@ function App() {
           )}
 
           {/* Tabs */}
-          <div className="flex mb-6 bg-gray-100 rounded-lg p-1">
+          <div className="flex mb-6 bg-gray-700 rounded-lg p-1">
             {(['Patient', 'Doctor', 'Admin'] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 className={`flex-1 py-2 px-4 text-sm font-medium rounded-md transition-colors ${
                   activeTab === tab
-                    ? 'bg-white text-black shadow-sm'
-                    : 'text-black hover:text-black'
+                    ? 'bg-gray-600 text-white shadow-sm'
+                    : 'text-gray-300 hover:text-white'
                 }`}
               >
                 {tab}
@@ -211,7 +211,7 @@ function App() {
           {!showCodeInput ? (
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-black mb-2">
+                <label htmlFor="email" className="block text-sm font-medium text-white mb-2">
                   Email Address
                 </label>
                 <input
@@ -219,7 +219,7 @@ function App() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
+                  className="w-full px-3 py-2 border border-gray-600 bg-gray-700 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white"
                   placeholder="Enter your email"
                   required
                 />
@@ -236,7 +236,7 @@ function App() {
           ) : (
             <form onSubmit={handleVerifyCode} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-black mb-2">
+                <label className="block text-sm font-medium text-white mb-2">
                   Verification Code
                 </label>
                 <input
@@ -244,10 +244,10 @@ function App() {
                   value={code}
                   onChange={(e) => setCode(e.target.value)}
                   placeholder="Enter 6-digit code"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
+                  className="w-full px-3 py-2 border border-gray-600 bg-gray-700 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white"
                   required
                 />
-                <p className="text-sm text-black mt-1">
+                <p className="text-sm text-gray-300 mt-1">
                   Code sent to {email}
                 </p>
               </div>
@@ -265,7 +265,7 @@ function App() {
                   setCode('');
                   setError('');
                 }}
-                className="w-full mt-2 py-2 px-4 text-black hover:text-gray-800 font-medium transition-colors"
+                className="w-full mt-2 py-2 px-4 text-gray-300 hover:text-white font-medium transition-colors"
               >
                 Back to Email
               </button>
