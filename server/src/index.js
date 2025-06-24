@@ -1,11 +1,11 @@
-import express, { Request, Response } from 'express';
-import path from 'path';
-import session from 'express-session';
+const express = require('express');
+const path = require('path');
+const session = require('express-session');
 
 const app = express();
 const PORT = parseInt(process.env.PORT || '5000', 10);
 
-// Simplified session configuration
+// Session configuration
 const sessionConfig = {
   secret: process.env.SESSION_SECRET || 'keepgoingcare-dev-secret-2025',
   resave: false,
@@ -17,21 +17,11 @@ const sessionConfig = {
   },
 };
 
-declare module 'express-session' {
-  interface SessionData {
-    userId?: number;
-    role?: string;
-    loginCode?: string;
-    loginEmail?: string;
-  }
-}
-
 app.use(session(sessionConfig));
 app.use(express.json());
 
-// --- Authentication Routes ---
 // Request login code
-app.post('/api/auth/request-login', async (req: Request, res: Response) => {
+app.post('/api/auth/request-login', async (req, res) => {
   const { email } = req.body;
   
   if (!email) {
@@ -45,8 +35,8 @@ app.post('/api/auth/request-login', async (req: Request, res: Response) => {
   console.log(`Login code for ${email}: ${code}`);
   
   // Store code temporarily
-  (req.session as any).loginCode = code;
-  (req.session as any).loginEmail = email;
+  req.session.loginCode = code;
+  req.session.loginEmail = email;
   
   res.json({ 
     message: 'Verification code sent',
@@ -55,20 +45,20 @@ app.post('/api/auth/request-login', async (req: Request, res: Response) => {
 });
 
 // Verify login code
-app.post('/api/auth/verify-login', async (req: Request, res: Response) => {
+app.post('/api/auth/verify-login', async (req, res) => {
   const { email, code } = req.body;
   
   if (!email || !code) {
     return res.status(400).json({ error: 'Email and code are required' });
   }
 
-  if ((req.session as any).loginCode !== code || (req.session as any).loginEmail !== email) {
+  if (req.session.loginCode !== code || req.session.loginEmail !== email) {
     return res.status(400).json({ error: 'Invalid verification code' });
   }
 
   // Clear the temporary login data
-  delete (req.session as any).loginCode;
-  delete (req.session as any).loginEmail;
+  delete req.session.loginCode;
+  delete req.session.loginEmail;
 
   // Handle the admin user specifically
   let user;
@@ -78,7 +68,7 @@ app.post('/api/auth/verify-login', async (req: Request, res: Response) => {
     user = {
       id: 1,
       email: email,
-      role: 'admin' as const
+      role: 'admin'
     };
   } else {
     // For other users, default to patient role
@@ -87,7 +77,7 @@ app.post('/api/auth/verify-login', async (req: Request, res: Response) => {
     user = {
       id: 2,
       email: email,
-      role: 'patient' as const
+      role: 'patient'
     };
   }
 
@@ -95,7 +85,7 @@ app.post('/api/auth/verify-login', async (req: Request, res: Response) => {
 });
 
 // Logout
-app.post('/api/auth/logout', (req: Request, res: Response) => {
+app.post('/api/auth/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       return res.status(500).json({ error: 'Failed to logout' });
@@ -105,7 +95,7 @@ app.post('/api/auth/logout', (req: Request, res: Response) => {
 });
 
 // Check session endpoint
-app.get('/api/auth/session', (req: Request, res: Response) => {
+app.get('/api/auth/session', (req, res) => {
   if (req.session.userId) {
     let email = 'user@example.com';
     if (req.session.userId === 1) {
@@ -123,15 +113,15 @@ app.get('/api/auth/session', (req: Request, res: Response) => {
   }
 });
 
-app.get('/api/health', (req: Request, res: Response) => {
-  res.status(200).send({ status: 'Integrated server is running with session management and auth routes' });
+app.get('/api/health', (req, res) => {
+  res.status(200).send({ status: 'Keep Going Care server running with authentication' });
 });
 
-// --- Static Asset Serving ---
+// Static file serving
 app.use(express.static(path.join(__dirname, '..', '..', 'client', 'dist')));
 
-// --- Client-Side Routing Fallback ---
-app.get('*', (req: Request, res: Response) => {
+// Client-side routing fallback
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', '..', 'client', 'dist', 'index.html'));
 });
 
