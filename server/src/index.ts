@@ -1,8 +1,8 @@
 import express, { Request, Response, RequestHandler } from 'express';
 import path from 'path';
 import session from 'express-session';
-import { db } from './db.js';
-import { users } from '../../shared/schema.js';
+import { db } from './db';
+import { users } from '../../shared/schema';
 import { eq } from 'drizzle-orm';
 
 const app = express();
