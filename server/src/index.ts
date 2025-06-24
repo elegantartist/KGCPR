@@ -1,12 +1,23 @@
-const express = require('express');
-const path = require('path');
-const session = require('express-session');
+import express from 'express';
+import path from 'path';
+import session from 'express-session';
+
+import type { Request, Response } from 'express';
 
 const app = express();
 const PORT = parseInt(process.env.PORT || '5000', 10);
 
+declare module 'express-session' {
+  interface SessionData {
+    userId?: number;
+    role?: string;
+    loginCode?: string;
+    loginEmail?: string;
+  }
+}
+
 // Session configuration
-const sessionConfig = {
+const sessionConfig: session.SessionOptions = {
   secret: process.env.SESSION_SECRET || 'keepgoingcare-dev-secret-2025',
   resave: false,
   saveUninitialized: false,
@@ -21,7 +32,7 @@ app.use(session(sessionConfig));
 app.use(express.json());
 
 // Request login code
-app.post('/api/auth/request-login', async (req, res) => {
+app.post('/api/auth/request-login', async (req: Request, res: Response) => {
   const { email } = req.body;
   
   if (!email) {
@@ -45,7 +56,7 @@ app.post('/api/auth/request-login', async (req, res) => {
 });
 
 // Verify login code
-app.post('/api/auth/verify-login', async (req, res) => {
+app.post('/api/auth/verify-login', async (req: Request, res: Response) => {
   const { email, code } = req.body;
   
   if (!email || !code) {
@@ -68,7 +79,7 @@ app.post('/api/auth/verify-login', async (req, res) => {
     user = {
       id: 1,
       email: email,
-      role: 'admin'
+      role: 'admin' as const
     };
   } else {
     // For other users, default to patient role
@@ -77,7 +88,7 @@ app.post('/api/auth/verify-login', async (req, res) => {
     user = {
       id: 2,
       email: email,
-      role: 'patient'
+      role: 'patient' as const
     };
   }
 
@@ -85,7 +96,7 @@ app.post('/api/auth/verify-login', async (req, res) => {
 });
 
 // Logout
-app.post('/api/auth/logout', (req, res) => {
+app.post('/api/auth/logout', (req: Request, res: Response) => {
   req.session.destroy((err) => {
     if (err) {
       return res.status(500).json({ error: 'Failed to logout' });
@@ -95,7 +106,7 @@ app.post('/api/auth/logout', (req, res) => {
 });
 
 // Check session endpoint
-app.get('/api/auth/session', (req, res) => {
+app.get('/api/auth/session', (req: Request, res: Response) => {
   if (req.session.userId) {
     let email = 'user@example.com';
     if (req.session.userId === 1) {
@@ -113,7 +124,7 @@ app.get('/api/auth/session', (req, res) => {
   }
 });
 
-app.get('/api/health', (req, res) => {
+app.get('/api/health', (req: Request, res: Response) => {
   res.status(200).send({ status: 'Keep Going Care server running with authentication' });
 });
 
@@ -121,7 +132,7 @@ app.get('/api/health', (req, res) => {
 app.use(express.static(path.join(__dirname, '..', '..', 'client', 'dist')));
 
 // Client-side routing fallback
-app.get('*', (req, res) => {
+app.get('*', (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, '..', '..', 'client', 'dist', 'index.html'));
 });
 
