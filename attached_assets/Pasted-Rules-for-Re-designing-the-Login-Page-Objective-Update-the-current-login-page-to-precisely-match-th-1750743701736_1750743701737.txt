@@ -1,0 +1,31 @@
+Rules for Re-designing the Login Page
+Objective: Update the current login page to precisely match the visual design provided in the screenshot (Screenshot 2025-06-21 at 10.51.23 pm.jpg) while maintaining the architectural integrity of the KGC application.
+
+1. Technology Stack Adherence:
+
+Framework: You must use the existing React framework. All changes will be made within the React component structure.
+Language: You must use JavaScript (ES6+).
+Styling: You must use the existing Tailwind CSS framework for all styling. Do not write custom CSS in .css files or use inline style attributes. All visual aspects—layout, colors, fonts, spacing, borders, shadows—must be implemented with Tailwind utility classes.
+2. Component Structure and File Modification:
+
+The primary file for modification is /src/components/SignIn.js.
+Keep the component self-contained. Do not add page-specific logic to parent components like App.js.
+Do not create new components unless a UI element is complex and clearly reusable across the application. For this login page, modifying SignIn.js should be sufficient.
+3. Layout and Responsiveness:
+
+Desktop Layout: Implement the two-column layout seen in the screenshot using Tailwind's Flexbox or Grid utilities (e.g., flex, md:flex-row, w-1/2). The entire container should be centered on the page.
+Mobile Layout: The design must be responsive. On smaller screens (e.g., mobile), the two columns should stack vertically, with the image appearing above the login form. Use Tailwind’s responsive prefixes (like sm:, md:, lg:) to achieve this.
+4. Asset Management:
+
+Place the image or illustration shown on the left side of the login page into a new /src/assets directory.
+Import the image directly into the SignIn.js component using a JavaScript import statement. Do not reference it using a public URL path.
+5. State and Logic Integrity:
+
+You must not alter the existing form logic.
+The component's state management for handling user input (e.g., using the useState hook for email and password) and the function that handles form submission must remain untouched. This task is purely a visual redesign.
+6. Code Quality and Cleanliness:
+
+Use clear, descriptive names for any new variables.
+The final JSX code must be clean and well-formatted for readability.
+Remove all old, commented-out code before finalizing the task. The file should only contain the code required for the new design.
+By following these rules strictly, you will ensure the new login page is visually accurate, technically robust, and perfectly integrated into the existing application architecture.
