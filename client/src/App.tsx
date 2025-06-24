@@ -139,12 +139,12 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-0">
-      <div className="w-full max-w-md mx-auto">
-        <div className="bg-white rounded-2xl shadow-lg p-8 m-4">
-          <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Keep Going Care</h1>
-            <p className="text-sm text-gray-600">Sign in to your account</p>
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-sm">
+        <div className="bg-white rounded-xl shadow-md p-8">
+          <div className="text-center mb-6">
+            <h1 className="text-2xl font-semibold text-gray-900 mb-1">Keep Going Care</h1>
+            <p className="text-sm text-gray-500">Sign in to your account</p>
           </div>
 
           {/* Role Selection Tabs */}
@@ -156,7 +156,7 @@ function App() {
                 className={`flex-1 py-2 px-3 text-sm font-medium rounded-md transition-colors ${
                   activeTab === role.toLowerCase()
                     ? 'bg-white text-gray-900 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900'
+                    : 'text-gray-500 hover:text-gray-700'
                 }`}
               >
                 {role}
@@ -181,14 +181,14 @@ function App() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={activeTab === 'admin' ? 'admin@keepgoingcare.com' : 'Enter your email'}
-                  className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
                   required
                 />
               </div>
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3 px-4 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-400 text-white font-medium rounded-md transition-colors"
+                className="w-full py-3 px-4 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-400 text-white font-medium rounded-lg transition-colors"
               >
                 {isSubmitting ? 'Sending...' : 'Send Verification Code'}
               </button>
@@ -204,7 +204,7 @@ function App() {
                   value={code}
                   onChange={(e) => setCode(e.target.value)}
                   placeholder="Enter 6-digit code"
-                  className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
                   required
                 />
                 <p className="text-sm text-gray-500 mt-1">
@@ -214,7 +214,7 @@ function App() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3 px-4 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-400 text-white font-medium rounded-md transition-colors"
+                className="w-full py-3 px-4 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-400 text-white font-medium rounded-lg transition-colors"
               >
                 {isSubmitting ? 'Verifying...' : 'Verify Code'}
               </button>
