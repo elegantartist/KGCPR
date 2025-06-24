@@ -139,120 +139,98 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <div className="max-w-4xl w-full">
-        <div className="bg-white rounded-lg shadow-sm border overflow-hidden">
-          <div className="flex flex-col md:flex-row min-h-[600px]">
-            {/* Left side - Illustration */}
-            <div className="md:w-1/2 bg-blue-50 flex items-center justify-center p-8">
-              <div className="text-center">
-                <div className="mb-6">
-                  <div className="w-64 h-64 mx-auto bg-blue-100 rounded-full flex items-center justify-center">
-                    <div className="w-48 h-48 bg-blue-200 rounded-full flex items-center justify-center">
-                      <div className="text-blue-600 text-6xl font-bold">KGC</div>
-                    </div>
-                  </div>
-                </div>
-                <h2 className="text-2xl font-semibold text-gray-800 mb-2">Welcome to Keep Going Care</h2>
-                <p className="text-gray-600">Your health journey starts here</p>
-              </div>
-            </div>
-            
-            {/* Right side - Login Form */}
-            <div className="md:w-1/2 p-8 flex items-center justify-center">
-              <div className="w-full max-w-sm">
-                <div className="text-center mb-8">
-                  <h1 className="text-3xl font-bold text-gray-900 mb-2">Keep Going Care</h1>
-                  <p className="text-gray-600">Sign in to your account</p>
-                </div>
-
-                {/* Role Selection Tabs */}
-                <div className="flex rounded-lg bg-gray-100 p-1 mb-6">
-                  {(['Patient', 'Doctor', 'Admin'] as const).map((role) => (
-                    <button
-                      key={role}
-                      onClick={() => setActiveTab(role.toLowerCase() as 'patient' | 'doctor' | 'admin')}
-                      className={`flex-1 py-2 px-3 text-sm font-medium rounded-md transition-colors ${
-                        activeTab === role.toLowerCase()
-                          ? 'bg-white text-gray-900 shadow-sm'
-                          : 'text-gray-600 hover:text-gray-900'
-                      }`}
-                    >
-                      {role}
-                    </button>
-                  ))}
-                </div>
-
-                {error && (
-                  <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md">
-                    <p className="text-sm text-red-600">{error}</p>
-                  </div>
-                )}
-
-                {!showCodeInput ? (
-                  <form onSubmit={handleRequestCode} className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Email Address
-                      </label>
-                      <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder={activeTab === 'admin' ? 'admin@keepgoingcare.com' : 'Enter your email'}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        required
-                      />
-                    </div>
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium rounded-lg transition-colors"
-                    >
-                      {isSubmitting ? 'Sending...' : 'Send Verification Code'}
-                    </button>
-                  </form>
-                ) : (
-                  <form onSubmit={handleVerifyCode} className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Verification Code
-                      </label>
-                      <input
-                        type="text"
-                        value={code}
-                        onChange={(e) => setCode(e.target.value)}
-                        placeholder="Enter 6-digit code"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        required
-                      />
-                      <p className="text-sm text-gray-500 mt-1">
-                        Code sent to {email}
-                      </p>
-                    </div>
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium rounded-lg transition-colors"
-                    >
-                      {isSubmitting ? 'Verifying...' : 'Verify Code'}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setShowCodeInput(false);
-                        setCode('');
-                        setError('');
-                      }}
-                      className="w-full py-3 px-4 text-gray-600 hover:text-gray-800 font-medium transition-colors"
-                    >
-                      Back to Email
-                    </button>
-                  </form>
-                )}
-              </div>
-            </div>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-0">
+      <div className="w-full max-w-md mx-auto">
+        <div className="bg-white rounded-2xl shadow-lg p-8 m-4">
+          <div className="text-center mb-8">
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">Keep Going Care</h1>
+            <p className="text-sm text-gray-600">Sign in to your account</p>
           </div>
+
+          {/* Role Selection Tabs */}
+          <div className="flex rounded-lg bg-gray-100 p-1 mb-6">
+            {(['Patient', 'Doctor', 'Admin'] as const).map((role) => (
+              <button
+                key={role}
+                onClick={() => setActiveTab(role.toLowerCase() as 'patient' | 'doctor' | 'admin')}
+                className={`flex-1 py-2 px-3 text-sm font-medium rounded-md transition-colors ${
+                  activeTab === role.toLowerCase()
+                    ? 'bg-white text-gray-900 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                {role}
+              </button>
+            ))}
+          </div>
+
+          {error && (
+            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md">
+              <p className="text-sm text-red-600">{error}</p>
+            </div>
+          )}
+
+          {!showCodeInput ? (
+            <form onSubmit={handleRequestCode} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={activeTab === 'admin' ? 'admin@keepgoingcare.com' : 'Enter your email'}
+                  className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-3 px-4 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-400 text-white font-medium rounded-md transition-colors"
+              >
+                {isSubmitting ? 'Sending...' : 'Send Verification Code'}
+              </button>
+            </form>
+          ) : (
+            <form onSubmit={handleVerifyCode} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Verification Code
+                </label>
+                <input
+                  type="text"
+                  value={code}
+                  onChange={(e) => setCode(e.target.value)}
+                  placeholder="Enter 6-digit code"
+                  className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  required
+                />
+                <p className="text-sm text-gray-500 mt-1">
+                  Code sent to {email}
+                </p>
+              </div>
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-3 px-4 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-400 text-white font-medium rounded-md transition-colors"
+              >
+                {isSubmitting ? 'Verifying...' : 'Verify Code'}
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowCodeInput(false);
+                  setCode('');
+                  setError('');
+                }}
+                className="w-full mt-2 py-3 px-4 text-gray-600 hover:text-gray-800 font-medium transition-colors"
+              >
+                Back to Email
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </div>
