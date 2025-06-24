@@ -236,8 +236,100 @@ const getAdminStats: RequestHandler = async (req: Request, res: Response) => {
 
 app.get('/api/admin/stats', getAdminStats);
 
+// AI Chat endpoint
+const handleChat: RequestHandler = async (req: Request, res: Response) => {
+  if (!req.session.userId) {
+    res.status(401).json({ error: 'Authentication required' });
+    return;
+  }
+
+  const { message } = req.body;
+  if (!message || typeof message !== 'string') {
+    res.status(400).json({ error: 'Message is required' });
+    return;
+  }
+
+  try {
+    const { supervisorAgentService } = await import('./services/supervisorAgent');
+    const response = await supervisorAgentService.processQuery(req.session.userId, message);
+
+    res.json({
+      success: true,
+      response,
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error('Chat error:', error);
+    res.status(500).json({ error: 'Failed to process chat message' });
+  }
+};
+
+app.post('/api/chat', handleChat);
+
+// Patient scores endpoint
+const submitScore: RequestHandler = async (req: Request, res: Response) => {
+  if (!req.session.userId) {
+    res.status(401).json({ error: 'Authentication required' });
+    return;
+  }
+
+  const { dietScore, exerciseScore, medicationScore, scoreDate } = req.body;
+  
+  if (!dietScore || !exerciseScore || !medicationScore) {
+    res.status(400).json({ error: 'All scores are required' });
+    return;
+  }
+
+  try {
+    const { patientScores } = await import('../../shared/schema');
+    
+    await db.insert(patientScores).values({
+      patientId: req.session.userId,
+      scoreDate: scoreDate || new Date().toISOString().split('T')[0],
+      dietScore: parseInt(dietScore),
+      exerciseScore: parseInt(exerciseScore),
+      medicationScore: parseInt(medicationScore)
+    });
+
+    res.json({ success: true, message: 'Scores submitted successfully' });
+  } catch (error) {
+    console.error('Score submission error:', error);
+    res.status(500).json({ error: 'Failed to submit scores' });
+  }
+};
+
+app.post('/api/scores', submitScore);
+
+// Get patient context endpoint
+const getPatientContext: RequestHandler = async (req: Request, res: Response) => {
+  if (!req.session.userId) {
+    res.status(401).json({ error: 'Authentication required' });
+    return;
+  }
+
+  try {
+    const { aiContextService } = await import('./services/aiContextService');
+    const context = await aiContextService.prepareContext(req.session.userId);
+
+    if (!context) {
+      res.status(404).json({ error: 'Patient context not found' });
+      return;
+    }
+
+    res.json({
+      success: true,
+      context
+    });
+  } catch (error) {
+    console.error('Context fetch error:', error);
+    res.status(500).json({ error: 'Failed to fetch patient context' });
+  }
+};
+
+app.get('/api/patient/context', getPatientContext);
+
 const healthCheck: RequestHandler = (req: Request, res: Response) => {
-  res.status(200).send({ status: 'Keep Going Care server running with authentication' });
+  res.status(200).send({ status: 'Keep Going Care server running with AI system' });
 };
 
 app.get('/api/health', healthCheck);
